@@ -1,4 +1,5 @@
-import { Entity, Column, ObjectIdColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn, ManyToOne, OneToMany } from 'typeorm';
+import { ProductLike } from './like.entity';
 
 @Entity()
 export class Product {
@@ -16,4 +17,10 @@ export class Product {
 
   @Column()
   isPublished: boolean;
+
+  @OneToMany(
+    () => ProductLike,
+    like => like.product,
+  )
+  likes: ProductLike[];
 }
